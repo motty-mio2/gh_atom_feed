@@ -1,6 +1,6 @@
 [project]
 name = "gh-atom-feed"
-version = "0.1.0"
+version = "0.0.3"
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -19,3 +19,14 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/gh_atom_feed"]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.16.0",
+    "ruff>=0.11.12",
+    "taskipy>=1.14.1",
+]
+
+[tool.taskipy.tasks]
+build = {cmd = "docker buildx build . -t mio2/gh_atom_feed:$(uv run get_var.py)"}
+push = {cmd = "docker push mio2/gh_atom_feed:$(uv run get_var.py)"}
