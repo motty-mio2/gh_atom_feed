@@ -13,7 +13,8 @@ RUN --mount=type=bind,from=req,source=/requirements.txt,target=/requirements.txt
 
 
 WORKDIR /app
-ENV PYTHONPATH="/app/src/"
+ENV PYTHONPATH="/app/src/" \
+    PORT=8080
 
 ARG USERNAME=dev \
     UID=1000 \
@@ -31,4 +32,4 @@ RUN --mount=type=bind,source=./pyproject.toml,target=/app/pyproject.toml \
     pip install --no-cache-dir /app
 
 
-CMD ["fastapi", "run", "src/gh_atom_feed/main.py", "--port", "8080"]
+CMD ["python", "-m", "fastapi", "run", "/app/src/gh_atom_feed/main.py", "--port", "8080"]

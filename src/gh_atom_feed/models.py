@@ -1,8 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Request(BaseModel):
-    url: str
+    github_url: str
+    discord_webhook: str = Field(default="")
     hour: int = 0
 
 
@@ -14,4 +15,4 @@ class Update(BaseModel):
 
 class Response(BaseModel):
     status: bool
-    updates: list[Update] = []
+    updates: int
