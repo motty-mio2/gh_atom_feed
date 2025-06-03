@@ -13,6 +13,8 @@ def read_root(item: Request) -> Response:
 
     if item.discord_webhook:
         for update in result:
-            send_discord(item.discord_webhook, f"{update.title}\n{update.content}")
+            send_discord(
+                item.discord_webhook, f"{update.title}\n{update.content}\n{update.url}"
+            )
 
     return Response(status=True, updates=len(result))
