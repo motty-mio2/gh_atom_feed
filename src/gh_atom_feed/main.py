@@ -1,5 +1,3 @@
-from email import message
-
 from fastapi import FastAPI
 
 from gh_atom_feed.functions.github import Github
