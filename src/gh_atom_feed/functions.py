@@ -2,7 +2,7 @@ import datetime
 
 import feedparser
 
-from gh_atom_feed.models import Update
+from gh_atom_feed.models.models import Update
 
 
 def parse_atom_feed(url: str, hour: int) -> list[Update]:
