@@ -16,20 +16,12 @@ WORKDIR /app
 ENV PYTHONPATH="/app/src/" \
     PORT=8080
 
-ARG USERNAME=dev \
-    UID=1000 \
-    GID=1000
-
-RUN groupadd -g "$GID" "$USERNAME" && \
-    useradd -l -m -u "$UID" -g "$GID" "$USERNAME"
-
-USER "$USERNAME"
-
-COPY --chown="$USERNAME":"$USERNAME" ./src /app/src
+COPY ./src /app/src
 
 RUN --mount=type=bind,source=./pyproject.toml,target=/app/pyproject.toml \
     --mount=type=bind,source=./README.md,target=/app/README.md \
     pip install --no-cache-dir /app
 
 
-CMD ["python", "-m", "fastapi", "run", "/app/src/gh_atom_feed/main.py", "--port", "8080"]
+CMD ["python", "-m", "fastapi", "run", "/app/src/gh_atom_feed/main.py", "--port", "${PORT}"]
+EXPOSE "${PORT}"
