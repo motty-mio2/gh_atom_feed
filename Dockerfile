@@ -13,8 +13,7 @@ RUN --mount=type=bind,from=req,source=/requirements.txt,target=/requirements.txt
 
 
 WORKDIR /app
-ENV PYTHONPATH="/app/src/" \
-    PORT=8080
+ENV PYTHONPATH="/app/src/"
 
 COPY ./src /app/src
 
@@ -23,5 +22,5 @@ RUN --mount=type=bind,source=./pyproject.toml,target=/app/pyproject.toml \
     pip install --no-cache-dir /app
 
 
-CMD ["python", "-m", "fastapi", "run", "/app/src/gh_atom_feed/main.py", "--port", "${PORT}"]
-EXPOSE "${PORT}"
+CMD ["python", "-m", "fastapi", "run", "/app/src/gh_atom_feed/main.py", "--port", "8080"]
+EXPOSE "8080"
